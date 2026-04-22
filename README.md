@@ -37,3 +37,11 @@ K-Means produced a validation accuracy of **58.72%**, the lowest of all models t
 
 ## Day 4: Decision Tree Tuning & LOOCV
 I performed **hyperparameter tuning** on the **Decision Tree**, finding that a max_depth of 10 maximizes CV accuracy (98.46%). Depths beyond 10 caused overfitting. I also conducted a Leave-One-Out CV (LOOCV) study. Because LOOCV is computationally expensive $O(n^2)$, I ran it on a 500-sample subset. It scored 91.20%. The gap between the 5-Fold (98.46%) and LOOCV (91.2%) demonstrates how significantly model performance drops when deprived of large training data.
+
+## Day 5 : Random Forest Ensemble
+
+### Analysis: The Score Paradox
+Despite a higher CV score (98.50%), the Random Forest (0.95945) underperformed the Decision Tree on the public leaderboard. This discrepancy suggests slight overfitting caused by the deeper **max_depth=15** setting in the Forest compared to the Tree's **max_depth=10**. It highlights the "Generalization Gap"—where a more complex model performs better on known data but fails to adapt to the specific noise within the public test set.
+
+### Depth Sensitivity Study
+I re-ran the Random Forest with **max_depth=10** to match the tuned Decision Tree. Surprisingly, the CV accuracy remained identical to the max_depth=15 run. This indicates that the ensemble naturally converges at a lower complexity, and additional depth provides no extra predictive power. This "saturation point" suggests that the most critical feature relationships are captured within the first 10 splits, making deeper trees redundant for this dataset.
