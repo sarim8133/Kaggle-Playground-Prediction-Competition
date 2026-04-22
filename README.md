@@ -15,7 +15,7 @@ Submit baseline
 
 Given the severe class imbalance, I implemented a "Zero-R" (majority-class) baseline rather than training an algorithm right out of the gate. Since "Low" is by far the most frequent category in the training data, my baseline script blindly predicts "Low" for every single instance in the test dataset hence my Keggle Score Baseline was set as **0.333**.
 
-## Day 2 
+## Day 2 : Baseline models — Decision Tree & Naive Bayes
 
 ### Decision Tree Results
 
