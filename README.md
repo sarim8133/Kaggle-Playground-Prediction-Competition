@@ -35,3 +35,5 @@ Logistic Regression achieved a CV accuracy of **74.88%** and a Kaggle score of *
 ### K-Means
 K-Means produced a validation accuracy of **58.72%**, the lowest of all models tested. Because K-Means is unsupervised, it grouped data by spatial distance rather than labels. Due to the high class imbalance, the majority class ("Low") dominated every cluster, leading the mapping strategy to predict "Low" for all instances. This **"failed attempt"** proves that distance-based clustering without label guidance is ineffective for this specific classification task.
 
+## Day 4: Decision Tree Tuning & LOOCV
+I performed **hyperparameter tuning** on the **Decision Tree**, finding that a max_depth of 10 maximizes CV accuracy (98.46%). Depths beyond 10 caused overfitting. I also conducted a Leave-One-Out CV (LOOCV) study. Because LOOCV is computationally expensive $O(n^2)$, I ran it on a 500-sample subset. It scored 91.20%. The gap between the 5-Fold (98.46%) and LOOCV (91.2%) demonstrates how significantly model performance drops when deprived of large training data.
