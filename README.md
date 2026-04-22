@@ -13,6 +13,6 @@ Submit baseline
 
 **Data Exploration & Baseline Submission**
 
-**Low**: 369,917 (Majority)** , **Medium**: 239,074 , **High**: 21,009
+**Low**: 369,917 (Majority) , **Medium**: 239,074 , **High**: 21,009
 
 Given the severe class imbalance, I implemented a "Zero-R" (majority-class) baseline rather than training an algorithm right out of the gate. Since "Low" is by far the most frequent category in the training data, my baseline script blindly predicts "Low" for every single instance in the test dataset.
