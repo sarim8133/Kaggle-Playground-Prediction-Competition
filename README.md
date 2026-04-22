@@ -26,3 +26,12 @@ I trained a Gaussian Naive Bayes model on the scaled features, achieving a **5-F
 
 ### Wrapping up Day 2!
 Decision Tree gave a public score of **0.96179** and Naive Bayes gave only a **0.68609**.
+
+## Day 3 : Logistic Regression & K-Means classifier
+
+### Logistic Regression
+Logistic Regression achieved a CV accuracy of **74.88%** and a Kaggle score of **0.61265**. The model showed significant underfitting compared to tree-based methods. Tuning the regularization parameter `C` had zero impact on accuracy, confirming that the relationship between soil/weather features and irrigation need is fundamentally **non-linear**. The linear decision boundaries were too rigid to capture the complex patterns required for high-accuracy predictions.
+
+### K-Means
+K-Means produced a validation accuracy of **58.72%**, the lowest of all models tested. Because K-Means is unsupervised, it grouped data by spatial distance rather than labels. Due to the high class imbalance, the majority class ("Low") dominated every cluster, leading the mapping strategy to predict "Low" for all instances. This **"failed attempt"** proves that distance-based clustering without label guidance is ineffective for this specific classification task.
+
