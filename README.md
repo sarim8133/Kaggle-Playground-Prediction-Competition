@@ -45,3 +45,9 @@ Despite a higher CV score (98.50%), the Random Forest (0.95945) underperformed t
 
 ### Depth Sensitivity Study
 I re-ran the Random Forest with **max_depth=10** to match the tuned Decision Tree. Surprisingly, the CV accuracy remained identical to the max_depth=15 run. This indicates that the ensemble naturally converges at a lower complexity, and additional depth provides no extra predictive power. This "saturation point" suggests that the most critical feature relationships are captured within the first 10 splits, making deeper trees redundant for this dataset.
+
+## Day 6:
+
+### Part 1: XGBoost(Gradient Boosting)
+
+XGBoost produced a public score of **0.95945**, identical to the Random Forest. This suggests the models have reached a "feature ceiling" where performance is limited by the data itself rather than the algorithm. The fact that both ensembles underperform the simpler Decision Tree (0.96179) indicates that the test set favors a lower-complexity model. The ensembles are likely capturing "patterns" in the training data that are actually noise relative to the specific subset used for the public leaderboard.
