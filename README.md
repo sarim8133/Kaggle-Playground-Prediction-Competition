@@ -51,3 +51,7 @@ I re-ran the Random Forest with **max_depth=10** to match the tuned Decision Tre
 ### Part 1: XGBoost(Gradient Boosting)
 
 XGBoost produced a public score of **0.95945**, identical to the Random Forest. This suggests the models have reached a "feature ceiling" where performance is limited by the data itself rather than the algorithm. The fact that both ensembles underperform the simpler Decision Tree (0.96179) indicates that the test set favors a lower-complexity model. The ensembles are likely capturing "patterns" in the training data that are actually noise relative to the specific subset used for the public leaderboard.
+
+### Part 2: LightGBM (Leaf-wise Boosting)
+
+LightGBM achieved the highest public leaderboard score of **0.96628**. By utilizing leaf-wise tree growth, the model captured high-frequency patterns that level-wise models (XGBoost/Random Forest) missed. Interestingly, this model had a lower CV score **(98.38%)** than the Random Forest, providing a perfect example of the "Validation-Test Gap." This suggests that LightGBM’s specific regularization and gradient-based sampling allowed it to generalize better to the noise present in the Kaggle test set.
