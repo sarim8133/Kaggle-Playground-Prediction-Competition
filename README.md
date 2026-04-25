@@ -55,3 +55,34 @@ XGBoost produced a public score of **0.95945**, identical to the Random Forest. 
 ### Part 2: LightGBM (Leaf-wise Boosting)
 
 LightGBM achieved the highest public leaderboard score of **0.96628**. By utilizing leaf-wise tree growth, the model captured high-frequency patterns that level-wise models (XGBoost/Random Forest) missed. Interestingly, this model had a lower CV score **(98.38%)** than the Random Forest, providing a perfect example of the "Validation-Test Gap." This suggests that LightGBM’s specific regularization and gradient-based sampling allowed it to generalize better to the noise present in the Kaggle test set.
+
+## Day 7 - Reaching Limits Through XGBoost FineTuning
+
+### 1. The Architecture (15-Model Ensemble)
+Instead of relying on one lucky model, the script built a fortress of 15 separate XGBoost models.
+**5-Fold Cross-Validation** : It split your training data into 5 chunks, training on 4 and testing on 1, ensuring every single row of your data was evaluated without bias.
+**3-Seed Averaging**: It ran that 5-Fold process three separate times using different random starting states (Seeds: 42, 2026, 777). This smoothed out any weird mathematical anomalies and stabilized the predictions.
+
+### 🧬 2. The Feature Engineering
+The script didn't just feed raw data into the trees; it transformed it:
+
+**Digit Extraction**: It sliced your numerical features apart, extracting specific decimal digits (digit-4 to digit3) to expose underlying rounding patterns in the sensors.
+**Ordered Target Encoding**: It translated your categorical data into probabilities (how likely a category is to result in Low, Medium, or High water need) while strictly preventing "data leakage" (preventing the model from cheating by looking at the validation answers).
+
+### ⏱️ 3. The Hardware Stress Test
+**Duration**: It ran for exactly 21,596 seconds (just under 6 hours).
+
+**Memory Management**: It actively flushed the RAM (gc.collect()) after every single fold, preventing the Kaggle free-tier kernel from crashing under the weight of the massive datasets.
+
+### 🏆 4. The Mathematical Victory (The Results)
+**The Raw Score**: After averaging all 15 models, the pure, unweighted Out-Of-Fold (OOF) Balanced Accuracy was 0.978115.
+
+**The Optuna Masterstroke:** The script then passed those raw predictions to Optuna. Optuna analyzed the mistakes and realized XGBoost was terribly under-predicting Class 3. It generated these exact multipliers:
+
+**Class 1 (Low): 0.72x**
+
+**Class 2 (Medium): 0.74x**
+
+**Class 3 (High): 2.36x**
+
+**The Final Score:** By aggressively boosting Class 3, your Balanced Accuracy skyrocketed to **0.980523**, and public score to **0.98083**.
