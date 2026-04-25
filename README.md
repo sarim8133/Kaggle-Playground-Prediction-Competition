@@ -60,13 +60,16 @@ LightGBM achieved the highest public leaderboard score of **0.96628**. By utiliz
 
 ### 1. The Architecture (15-Model Ensemble)
 Instead of relying on one lucky model, the script built a fortress of 15 separate XGBoost models.
+
 **5-Fold Cross-Validation** : It split your training data into 5 chunks, training on 4 and testing on 1, ensuring every single row of your data was evaluated without bias.
+
 **3-Seed Averaging**: It ran that 5-Fold process three separate times using different random starting states (Seeds: 42, 2026, 777). This smoothed out any weird mathematical anomalies and stabilized the predictions.
 
 ### 🧬 2. The Feature Engineering
 The script didn't just feed raw data into the trees; it transformed it:
 
 **Digit Extraction**: It sliced your numerical features apart, extracting specific decimal digits (digit-4 to digit3) to expose underlying rounding patterns in the sensors.
+
 **Ordered Target Encoding**: It translated your categorical data into probabilities (how likely a category is to result in Low, Medium, or High water need) while strictly preventing "data leakage" (preventing the model from cheating by looking at the validation answers).
 
 ### ⏱️ 3. The Hardware Stress Test
