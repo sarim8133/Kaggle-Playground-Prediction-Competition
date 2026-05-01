@@ -89,3 +89,4 @@ The script didn't just feed raw data into the trees; it transformed it:
 **Class 3 (High): 2.36x**
 
 **The Final Score:** By aggressively boosting Class 3, your Balanced Accuracy skyrocketed to **0.980523**, and public score to **0.98083**.
+<img width="1233" height="76" alt="image" src="https://github.com/user-attachments/assets/f74f4d91-477c-44d2-ad31-8f5f13507c56" />
